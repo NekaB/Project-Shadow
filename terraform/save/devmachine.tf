@@ -3,3 +3,4 @@ resource "aws_instance" "dev_machine" {
 instance_type	= "t2.micro"
 
 }
+
