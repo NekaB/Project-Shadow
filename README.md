@@ -1,4 +1,3 @@
 # Project-Shadow
 Portfolio 
-This project is to showcase my skills utilizing various DevOps tools and methods. 
-
+Showing how I utilized Terraform and Ansible devops tools with AWS 
