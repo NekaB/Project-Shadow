@@ -2,7 +2,7 @@
  hosts: Dev 
  tasks: 
  name: Install Apache web server
- apt:  pkg=apache state=installed update_cache=true 
+ apt: pkg=apache state=installed update_cache=true 
 
  hosts: Prod
  tasks:
