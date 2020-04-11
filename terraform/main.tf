@@ -32,6 +32,11 @@ resource "aws_security_group" "Customer_Security_Group" {
 resource "aws_instance" "dev_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
+
+  tags = { 
+    Name = "Dev"
+ }
+
 }
 
 resource "aws_instance" "jump_machine" {
@@ -42,11 +47,17 @@ resource "aws_instance" "jump_machine" {
 resource "aws_instance" "prod_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
-}
 
+  tags = { 
+    Name = "Prod"
+ }
+
+}
 resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
+
+
 }
 
 resource "aws_instance" "web" {
@@ -60,6 +71,5 @@ resource "aws_instance" "web" {
   }
 
 } 
-
 
 
