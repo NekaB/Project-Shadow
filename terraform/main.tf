@@ -28,6 +28,7 @@ resource "aws_security_group" "Customer_Security_Group" {
   }
 }
 
+
 resource "aws_instance" "dev_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
@@ -57,4 +58,8 @@ resource "aws_instance" "web" {
   tags = {
     Name = "Web"
   }
-}
+
+} 
+
+
+
