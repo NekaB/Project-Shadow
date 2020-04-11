@@ -1,6 +1,6 @@
 
-hosts: Dev 
-tasks: 
+ hosts: Dev 
+ tasks: 
  name: Install Apache web server
  apt:  pkg=apache state=installed update_cache=true 
 
