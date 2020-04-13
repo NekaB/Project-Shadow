@@ -57,6 +57,10 @@ resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
 
+  tags = {
+    Name = "Jenkins"
+ } 
+
 }
 
 resource "aws_instance" "web" {

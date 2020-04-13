@@ -1,12 +1,14 @@
+---
+- name: Install Apache Web Server
+  hosts: Machines
+  become: true 
 
- hosts: Dev 
- tasks: 
- name: Install Apache web server
- apt: pkg=apache state=installed update_cache=true 
 
- hosts: Prod
- tasks:
- name: Install Apache web server
- apt: pkg=apache state=installed update_cache=true
+  tasks:
+ - name: Install the latest version
+   yum:
+    name: httpd
+    state: latest
+
 
         
