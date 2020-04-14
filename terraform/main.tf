@@ -102,6 +102,23 @@ resource "aws_instance" "prod_machine" {
 resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
+<<<<<<< HEAD
+=======
+  
+   lifecycle {
+    prevent_destroy = true
+  }
+
+  tags = {
+    Name = "Jenkins"
+ } 
+
+}
+
+resource "aws_instance" "web" {
+  ami = "ami-08fe38a2865705db8"
+  instance_type = "t2.micro"
+>>>>>>> 281e2fcd304fa55550803796edcd4fc8b9866cda
   vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
   key_name = "Nbrown"
   
