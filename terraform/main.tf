@@ -13,6 +13,24 @@ resource "aws_security_group" "Employee_Security_Group" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+ingress {
+  description = "HTTP for updates"
+  from_port = 80
+  to_port = 80
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+ingress {
+description = "HTTPS for updates"
+from_port = 443
+to_port = 443
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+
+
 }
 
 resource "aws_security_group" "Customer_Security_Group" {
@@ -26,6 +44,8 @@ resource "aws_security_group" "Customer_Security_Group" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
+
 }
 
 
@@ -56,6 +76,13 @@ resource "aws_instance" "prod_machine" {
 resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
+  key_name = "Nbrown"
+  
+  lifecycle {
+    		prevent_destroy = true
+      
+  }
 
   tags = {
     Name = "Jenkins"
