@@ -1,0 +1,9 @@
+[local]
+dev   ansible_host=3.84.199.200
+prod  ansible_host=3.92.137.12
+jenkins ansible_host=18.207.221.69
+jump ansible_host=34.226.141.249 
+
+[webmachines] 
+dev
+prod
