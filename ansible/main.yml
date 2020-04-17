@@ -1,14 +1,22 @@
 ---
-- name: Install Apache Web Server
-  hosts: Machines
-  become: true 
+- hosts: all 
+  become: true
 
 
   tasks:
- - name: Install the latest version
-   yum:
-    name: httpd
-    state: latest
+  - name: Set hostname
+    hostname:
+      name:   "{{inventory_hostname}}"
 
+  - name: install httpd
+    yum: 
+      name:   httpd 
+      state:  present
+    when:   '"webmachines" in group_names'
 
-        
+  - name: start and enable webservers
+    service: 
+      name: httpd
+      state: started
+      enabled: true
+    when:   '"webmachines" in group_names'
