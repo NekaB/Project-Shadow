@@ -2,6 +2,9 @@ provider "aws" {
   region = "us-east-1"
 }
 
+#Security Groups Start
+
+
 resource "aws_security_group" "Employee_Security_Group" {
   name = "Employee_Security_Group"
   description = "Employee Security Group"
@@ -11,7 +14,7 @@ resource "aws_security_group" "Employee_Security_Group" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["73.106.72.159/32"]
+    cidr_blocks = ["73.106.0.0/16"]
   }
 
 ingress {
@@ -19,7 +22,7 @@ ingress {
   from_port = 80
   to_port = 80
   protocol = "tcp"
-  cidr_blocks = ["73.106.72.159/32"]
+  cidr_blocks = ["73.106.0.0/16"]
 }
 
 ingress {
@@ -27,7 +30,7 @@ description = "HTTPS for updates"
 from_port = 443
 to_port = 443
 protocol = "tcp"
-cidr_blocks = ["73.106.72.159/32"]
+cidr_blocks = ["73.106.0.0/16"]
 }
 
 
@@ -64,7 +67,7 @@ resource "aws_security_group" "Customer_Security_Group" {
 
 }
 
-
+#Start of Machines 
 
 resource "aws_instance" "jump_machine" {
   ami = "ami-08fe38a2865705db8"
@@ -72,9 +75,12 @@ resource "aws_instance" "jump_machine" {
   vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
   key_name = "Nbrown"
 
+ 
+  
   tags = { 
     Name = "Jump"
   }
+
 }
 
 resource "aws_instance" "dev_machine" {
@@ -83,26 +89,32 @@ resource "aws_instance" "dev_machine" {
   vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
   key_name = "Nbrown"
 
+
+
   tags = { 
     Name = "Dev"
   }
 
 }
+
 resource "aws_instance" "prod_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
   key_name = "Nbrown"
 
+
   tags = { 
     Name = "Prod"
   }
 
 }
+
 resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
+
   
    lifecycle {
     prevent_destroy = true
@@ -111,8 +123,40 @@ resource "aws_instance" "jenkins_machine" {
   tags = {
     Name = "Jenkins"
  } 
- 
+
+
+
 }
+
+
+#Elastic IP (EIP) Code Blocks start here
+
+
+resource "aws_eip" "jump" {
+instance = aws_instance.jump_machine.id
+ } 
+ 
+
+
+
+resource "aws_eip" "dev"  {
+instance = aws_instance.dev_machine.id
+ } 
+
+
+resource "aws_eip" "prod"  {
+instance = aws_instance.prod_machine.id
+ } 
+
+
+resource "aws_eip" "jenkins"  {
+instance = aws_instance.jenkins_machine.id
+ } 
+
+
+#Elastic-IP ends here
+
+
 
 
 
