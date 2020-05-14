@@ -21,11 +21,11 @@
       enabled: true
     when:   '"webmachines" in group_names'
 
-  - name: add ssh private/public key to jump server
-    openssh_keypair:
+  - openssh_keypair:
       path: /tmp/id_ssh_rsa
     when: inventory_hostname == 'jump'
 
+  
   - name: Fetching file to install ssh keys
     fetch:
       src: /etc/ssh/ssh_host_rsa_key.pub
@@ -33,7 +33,6 @@
 
   - name: Set authorized key taken from file
     authorized_key:
-      user: jump
+      user: "{{inventory_hostname}}"
       state: present
-      key: "{{ lookup('file', '/home/jump/.ssh/id_rsa.pub') }}"
-
+      key: "{{ lookup('file', '/home/{{inventory_hostname}}/.ssh/id_rsa.pub') }}"
