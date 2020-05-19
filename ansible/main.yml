@@ -30,9 +30,9 @@
     fetch:
       src: /etc/ssh/ssh_host_rsa_key.pub
       dest: /tmp/fetched
+ 
+  - name: Copy the file from jump to local hosts
+    copy: src=/etc/ssh/ssh_host_rsa_key.pub dest=/tmp/fetched
+    when: "[ inventory_hostname == 'local' ]" 
 
-  - name: Set authorized key taken from file
-    authorized_key:
-      user: "{{inventory_hostname}}"
-      state: present
-      key: "{{ lookup('file', '/home/{{inventory_hostname}}/.ssh/id_rsa.pub') }}"
+
