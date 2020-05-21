@@ -30,9 +30,10 @@
     fetch:
       src: /home/ec2-user/.ssh/id_rsa.pub
       dest: /tmp/id_rsa.pub
+      when: inventory_hostname == 'jump'
  
   - name: Set authorized key taken from file
     authorized_key:
-      user: nbrown
+      user: ec2-user
       state: present
       key: "{{ lookup('file', '/tmp/id_rsa.pub') }}"
