@@ -114,13 +114,13 @@ resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
+  key_name = "Nbrown"
 
-  
-   lifecycle {
+  lifecycle {
     prevent_destroy = true
   }
 
-  tags = {
+    tags = {
     Name = "Jenkins"
  } 
 
