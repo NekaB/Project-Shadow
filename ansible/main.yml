@@ -39,6 +39,4 @@
       state: present
       key: "{{ lookup('file', '/tmp/id_rsa.pub') }}"
 
-  - debug:
-      msg: "public key: {{lookup('file','/tmp/id_rsa.pub')}}"
  
