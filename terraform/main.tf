@@ -4,6 +4,30 @@ provider "aws" {
 
 #Security Groups Start
 
+resource "aws_security_group" "Jump_Security" {
+  name        = "Jump_Security"
+  description = "Allow Access from Jump Box Only"
+
+  ingress {
+    description = "SSH from my apartment"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["172.31.0.0/16"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol ="-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  tags = {
+    Name = "Jump Access Only"
+  }
+}
+
 
 resource "aws_security_group" "Employee_Security_Group" {
   name = "Employee_Security_Group"
@@ -86,7 +110,7 @@ resource "aws_instance" "jump_machine" {
 resource "aws_instance" "dev_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
+  vpc_security_group_ids = [aws_security_group.Jump_Security.id]
   key_name = "Nbrown"
 
 
@@ -100,7 +124,7 @@ resource "aws_instance" "dev_machine" {
 resource "aws_instance" "prod_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
+  vpc_security_group_ids = [aws_security_group.Jump_Security.id]
   key_name = "Nbrown"
 
 
@@ -113,7 +137,7 @@ resource "aws_instance" "prod_machine" {
 resource "aws_instance" "jenkins_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Employee_Security_Group.id]
+  vpc_security_group_ids = [aws_security_group.Jump_Security.id]
   key_name = "Nbrown"
 
   lifecycle {
