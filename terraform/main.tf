@@ -17,7 +17,7 @@ resource "aws_security_group" "Jump_Security" {
   }
 
    ingress {
-    description = "SSH from my apartment"
+    description = "Port from my apartment"
     from_port = 8080
     to_port = 8080
     protocol = "tcp"
@@ -121,7 +121,7 @@ resource "aws_instance" "jump_machine" {
 resource "aws_instance" "dev_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Jump_Security.id]
+  vpc_security_group_ids = [aws_security_group.Jump_Security.id,aws_security_group.Customer_Security_Group.id]
   key_name = "Nbrown"
 
 
@@ -135,7 +135,7 @@ resource "aws_instance" "dev_machine" {
 resource "aws_instance" "prod_machine" {
   ami = "ami-08fe38a2865705db8"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Jump_Security.id]
+  vpc_security_group_ids = [aws_security_group.Jump_Security.id,aws_security_group.Customer_Security_Group.id]
   key_name = "Nbrown"
 
 
