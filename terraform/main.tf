@@ -52,6 +52,15 @@ resource "aws_security_group" "Employee_Security_Group" {
     cidr_blocks = ["73.106.0.0/16"]
   }
 
+
+  ingress {
+    description = "SSH from Actual Wifi"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["24.99.0.0/16"]
+  }
+
 ingress {
   description = "HTTP for updates"
   from_port = 80
@@ -96,7 +105,15 @@ resource "aws_security_group" "Customer_Security_Group" {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["73.106.0.0/16"]
+  }
+
+  ingress {
+    description = "On Actual WiFi"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["24.99.0.0/16"]
   }
   
 
