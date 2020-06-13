@@ -47,7 +47,7 @@ files of the Dev, Prod, and Jenkins machine.
 
 **How Jenkins deploys code automatically via the Dev Branch and Head commits:**
 
-Jenkins is connected to a github account holding the Portfolio- Files needed to update and stage the Dev and Prod browsers. The Github plugin in Jenkins allows a webhook feature to git. When any changes are committed to the Portfolio-files Master or Dev branch, the Jenkins is triggered, and the adjustments
+Jenkins is connected to a github account holding the Portfolio- Files needed to update and stage the Dev and Prod browsers. The Github plugin in Jenkins allows a webhook feature to git. When any changes are committed to the Portfolio-files Master or Dev branch, then Jenkins is triggered, and the adjustments
 are applied to the suggested server (Dev or Prod) and shown in the browser. 
 
 
