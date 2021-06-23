@@ -2,7 +2,7 @@
 
 ## **Description:**
 
-This is the Portfolio for Project-Shadow: A DevOps project where I feature the methods I used to create a work environment in AWS, utilizing different instances and resources for the provisioning of code and software to maintain and update a web server. The importance of this project is to show my understanding of DevOps capabilities and culture. 
+This is the Portfolio for Project-Shadow: A DevOps project where I feature the methods I used to create a work environment in AWS, utilizing different instances and resources for the provisioning of code and software to maintain and update a website. The importance of this project is to show my understanding of DevOps capabilities and culture. 
 
 ## **Table of Contents:**
 
